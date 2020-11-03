@@ -4,6 +4,6 @@ function setup() {
 }
 
 function draw() {
-  circle(mouseX,mouseY,40)
+  circle(mouseX,mouseY,40);
 
 }
