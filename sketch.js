@@ -7,7 +7,7 @@ function make2DArray(rows, cols) {
 }
 
 let angle = 0;
-let w = 120;
+let w = 110;
 let cols;
 let rows;
 let curves;
@@ -20,7 +20,7 @@ let I = 2/7;
 let slider2;
 
 function setup() {
-   createCanvas(500, 500);
+   createCanvas(1500, 1500);
    slider = createSlider(1,10,4,0.1);
    slider2 = createSlider(1,10,4,0.1);
   
@@ -64,7 +64,7 @@ function draw() {
   beginShape();
   stroke(0,0,0,60);
   noFill();
-  strokeWeight(1);
+  strokeWeight(3);
   
   //1번째 녀석
   for (var a = 0; a<TWO_PI * 9; a+= 0.2){
@@ -106,23 +106,23 @@ function draw() {
   
  
   // 원이 그려지는 모양
-  let d = w - 50 * w;
+  let d = w - 40 * w;
   let r1 = d / 2;
 
   noFill();
-  stroke(200);
+  stroke(100);
   for (let i = 0; i < cols; i++) {
     let cx = w + i * w + w / 2;
     let cy = w / 2;
     strokeWeight(2);
-    stroke(200);
+    stroke(100);
     ellipse(cx, cy, d, d);
     let x = r * cos(angle * (i + 0.5) - HALF_PI);
     let y = r * sin(angle * (i + 0.5) - HALF_PI);
     strokeWeight(0);
-    stroke(200);
+    stroke(100);
     point(cx + x, cy + y);
-    stroke(200);
+    stroke(100);
     strokeWeight(0);
     line(cx + x, 0, cx + x, height);
 
@@ -132,7 +132,7 @@ function draw() {
   }
 
   noFill();
-  stroke(200);
+  stroke(100);
   for (let j = 0; j < rows; j++) {
     let cx = w / 2;
     let cy = w + j * w + w / 2;
@@ -176,12 +176,11 @@ function draw() {
 }
 
 class Particle {
-  //왜 여기에 speed가 들어가지?
   constructor(speed) {
     this.pos = createVector(random(0,400));
     this.vel = createVector(0,0.2);
     this.acc = createVector(0.2);
-    this.d = 25;
+    this.d = 15;
     this.acc = speed;
   }
   
