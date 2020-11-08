@@ -6,8 +6,8 @@ function make2DArray(rows, cols) {
   return arr;
 }
 
-let angle = 0;
-let w = 110;
+let angle = 15;
+let w = 100;
 let cols;
 let rows;
 let curves;
@@ -20,12 +20,12 @@ let I = 2/7;
 let slider2;
 
 function setup() {
-   createCanvas(1500, 1500);
+   createCanvas(600, 600);
    slider = createSlider(1,10,4,0.1);
    slider2 = createSlider(1,10,4,0.1);
   
-  cols = floor(width / w) - 1;
-  rows = floor(height / w) - 1;
+  cols = floor(width / w) - 2;
+  rows = floor(height / w) - 2;
   curves = make2DArray(rows,cols);
 
   for (let j = 0; j < rows; j++) {
@@ -37,7 +37,7 @@ function setup() {
  //applyForce(gravity);를 없애 버림, 중력 = CreateVector라고 할당하던 것을 바로 적용시킴
   particle1 = new Particle(createVector(0,0.1));
   particle2 = new Particle(createVector(0.01,0.02));
-  particle3 = new Particle(createVector(0.1,0.2));
+  particle3 = new Particle(createVector(0.3,0.1));
 
 }
  
@@ -60,15 +60,15 @@ function draw() {
   particle3.bounce();
   
   // 0번째 
-  translate(width/2,height/2);
+  translate(width/3,height/3);
   beginShape();
-  stroke(0,0,0,60);
+  stroke(0,0,0,100);
   noFill();
-  strokeWeight(3);
+  strokeWeight(1);
   
   //1번째 녀석
-  for (var a = 0; a<TWO_PI * 9; a+= 0.2){
-    var r = 200 * cos(k*a);
+  for (var a = 0; a<TWO_PI * 9; a+= 0.5){
+    var r = 300 * cos(k*a);
     var x = r * cos(a);
     var y = r * sin(a);
     vertex(x,y);
@@ -82,7 +82,7 @@ function draw() {
   
   //2번째 녀석
   for (var a = 0; a<TWO_PI * 3; a+= 0.2){
-    var r = 300 * cos(I*a);
+    var r = 30 * cos(I*a);
     var x = r * cos(a);
     var y = r * sin(a);
     vertex(x,y);
@@ -91,7 +91,7 @@ function draw() {
   
   translate(width/2,height/2);
   beginShape();
-  stroke(0,0,0,30);
+  stroke(0,0,0,60);
   noFill();
   strokeWeight(1);
   
@@ -106,23 +106,23 @@ function draw() {
   
  
   // 원이 그려지는 모양
-  let d = w - 40 * w;
+  let d = w -20 * w;
   let r1 = d / 2;
 
   noFill();
-  stroke(100);
+  stroke(200);
   for (let i = 0; i < cols; i++) {
     let cx = w + i * w + w / 2;
     let cy = w / 2;
     strokeWeight(2);
-    stroke(100);
+    stroke(200);
     ellipse(cx, cy, d, d);
     let x = r * cos(angle * (i + 0.5) - HALF_PI);
     let y = r * sin(angle * (i + 0.5) - HALF_PI);
     strokeWeight(0);
-    stroke(100);
+    stroke(200);
     point(cx + x, cy + y);
-    stroke(100);
+    stroke(200);
     strokeWeight(0);
     line(cx + x, 0, cx + x, height);
 
@@ -132,15 +132,15 @@ function draw() {
   }
 
   noFill();
-  stroke(100);
+  stroke(200);
   for (let j = 0; j < rows; j++) {
     let cx = w / 2;
     let cy = w + j * w + w / 2;
     strokeWeight(0);
     stroke(0);
     ellipse(cx, cy, d, d);
-    let x = r * cos(angle * (j + 1) - HALF_PI);
-    let y = r * sin(angle * (j + 1) - HALF_PI);
+    let x = r * cos(angle * (j + 10) - HALF_PI);
+    let y = r * sin(angle * (j + 10) - HALF_PI);
     strokeWeight(25);
     stroke(random(0,255));
     point(cx + x, cy + y);
@@ -162,7 +162,7 @@ function draw() {
   }
 
 
-  angle -= 0.02;
+  angle -= 0.6;
 
   if (angle < -TWO_PI) {
     for (let j = 0; j < rows; j++) {
@@ -176,11 +176,12 @@ function draw() {
 }
 
 class Particle {
+  //왜 여기에 speed가 들어가지?
   constructor(speed) {
     this.pos = createVector(random(0,400));
     this.vel = createVector(0,0.2);
     this.acc = createVector(0.2);
-    this.d = 15;
+    this.d = 25;
     this.acc = speed;
   }
   
