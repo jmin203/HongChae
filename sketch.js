@@ -48,7 +48,8 @@ class Particle {
     this.position.add(this.velocity);
     this.lifespan -= 2;
   }
-
+  
+// 이부분을 수정하니까 원과 사각형이 함께 나온다.
   // Method to display
   display() {
     stroke(100, this.lifespan);
